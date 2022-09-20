@@ -17,8 +17,8 @@ const getRSS = (item) => {
         if (current.embeds.length > 0) {
             content = content + `   <item>
         <title><![CDATA[${current.embeds[0].title ?? current.embeds[0].description} (${current.author.username})]]></title>
-        <link>${current.embeds[0].url}</link>
-        <guid>${current.embeds[0].url}</guid>
+        <link>${current.embeds[0].url.split('?')[0]}</link>
+        <guid>${current.embeds[0].url.split('?')[0]}</guid>
         <description><![CDATA[<p>${current.embeds[0].description}</p>]]></description>
         <pubDate>${current.timestamp}</pubDate>
      </item>`

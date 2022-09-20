@@ -2,10 +2,10 @@ import { Application } from "https://deno.land/x/oak/mod.ts";
 import { config } from "https://deno.land/x/dotenv/mod.ts";
 import "https://deno.land/x/dotenv/load.ts";
 const app = new Application();
-const endpoint = "https://discord.com/api/v9/channels/235894217048588289/messages?limit=50"
+const endpoint = `https://discord.com/api/v9/channels/${Deno.env.get('DISCORD_CHANNEL_ID')}/messages?limit=50`
 
 
-const getRSS = (item) => {
+const getRSS = (items) => {
     let content = `<?xml version="1.0" encoding="UTF-8"?>
     <rss version="2.0">
        <channel>
@@ -13,7 +13,7 @@ const getRSS = (item) => {
           <description><![CDATA[Flux RSS du channel Discord]]></description>
           <link>https://codinglab.io</link>`
 
-    item.forEach(current => {
+    items.forEach(current => {
         if (current.embeds.length > 0) {
             content = content + `   <item>
         <title><![CDATA[${current.embeds[0].title ?? current.embeds[0].description} (${current.author.username})]]></title>
